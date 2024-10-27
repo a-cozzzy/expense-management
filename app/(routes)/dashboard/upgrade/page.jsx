@@ -3,7 +3,7 @@ import React from 'react'
 function upgrade() {
   return (
     <div>
-      Upgrade
+      <h1>Upgrade</h1>
     </div>
   )
 }
