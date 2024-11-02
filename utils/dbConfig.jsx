@@ -7,4 +7,4 @@ dotenv.config({ path: ".env.local" });
 
 
 const sql = neon('postgresql://expensems_owner:LFRf8p1JvMCI@ep-dawn-fire-a5o9hwuk.us-east-2.aws.neon.tech/expensems?sslmode=require');
-export const db = drizzle({ client: sql }, { schema });
+export const db = drizzle(sql, { schema });

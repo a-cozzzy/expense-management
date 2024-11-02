@@ -1,5 +1,6 @@
 import React from 'react'
 import BudgetList from './_components/BudgetList'
+import { headers } from 'next/headers'
 
 function Budget() {
   return (
@@ -9,5 +10,6 @@ function Budget() {
     </div>
   )
 }
+
 
 export default Budget

@@ -1,3 +1,4 @@
+'usse client'
 import React from 'react'
 import CreateBudget from './CreateBudget'
 
