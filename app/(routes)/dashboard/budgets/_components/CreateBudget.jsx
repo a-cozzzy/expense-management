@@ -84,23 +84,26 @@ function CreateBudget() {
                                         />
                                     </div>
                                 )}
-                                <div className='mt-2'>
-                                    <h2 className='text-black font-medium my-1'>Budget Name</h2>
+                                <div className='mt-4'>
+                                    {/* Change h2 to another suitable tag */}
+                                    <label className='text-black font-medium my-1'>Budget Name</label>
                                     <Input
-                                        placeholder="e.g. Home Decor"
+                                        placeholder="e.g. Travel"
                                         onChange={(e) => setName(e.target.value)}
                                     />
                                 </div>
-                                <div className='mt-2'>
-                                    <h2 className='text-black font-medium my-1'>Budget Amount</h2>
+                                <div className='mt-4'>
+                                    <label className='text-black font-medium my-1'>Budget Amount</label>
                                     <Input
                                         type="number"
-                                        placeholder="e.g. 5000$"
+                                        placeholder="e.g. Rs.2000"
                                         onChange={(e) => setAmount(e.target.value)}
                                     />
                                 </div>
                             </div>
                         </DialogDescription>
+
+
                     </DialogHeader>
                     <DialogFooter className="sm:justify-start">
                         <DialogClose asChild>
