@@ -1,7 +1,9 @@
+"use client"
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { db } from '@/utils/dbConfig';
 import { Budgets, Expenses } from '@/utils/schema';
+import moment from 'moment/moment';
 import React, { useState } from 'react'
 import { toast } from 'sonner';
 
@@ -13,9 +15,9 @@ function AddExpense({budgetId, user, refreshData}) {
     const addNewExpense = async () => {
         const result = await db.insert(Expenses).values({
             name: name,
-            amount: parseInt(amount, 10),  // Convert amount to integer
+            amount: parseInt(amount, 10),  
             budgetId: budgetId,
-            createdAt: user?.primaryEmailAddress?.emailAddress
+            createdAt:moment().format('DD.MM.yyyy')
         }).returning({ insertedId: Budgets.id });
 
         console.log(result);

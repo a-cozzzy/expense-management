@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import dynamic from 'next/dynamic';
 import {
     Dialog,
@@ -16,15 +16,7 @@ import { toast } from 'sonner';
 import { useUser } from '@clerk/nextjs';
 import { Budgets } from '@/utils/schema';
 
-const EmojiPicker = dynamic(
-    () => import('emoji-picker-react'),
-    { 
-        ssr: false,
-        loading: () => <div>Loading...</div>
-    }
-);
-
-const CreateBudget = ({refreshData}) => {
+const CreateBudget = ({ refreshData }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [emojiIcon, setEmojiIcon] = useState('💰');
     const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
@@ -32,6 +24,15 @@ const CreateBudget = ({refreshData}) => {
     const [amount, setAmount] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { user } = useUser();
+    const [currentDate, setCurrentDate] = useState(null);
+    
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        // This will ensure this component is rendered only on the client side
+        setCurrentDate(new Date());
+        setIsClient(true);
+    }, []);
 
     const resetForm = () => {
         setName('');
@@ -72,11 +73,11 @@ const CreateBudget = ({refreshData}) => {
                     amount: parseFloat(amount),
                     createdBy: user.primaryEmailAddress.emailAddress,
                     icon: emojiIcon,
-                    createdAt: new Date()
+                    createdAt: new Date() // This is now safe for client-side
                 }).returning({ insertedId: Budgets.id });
 
             if (result) {
-                refreshData()
+                refreshData();
                 toast.success('New Budget Created!');
                 handleClose();
             }
@@ -115,12 +116,14 @@ const CreateBudget = ({refreshData}) => {
                             </Button>
                             {openEmojiPicker && (
                                 <div className='absolute z-20 mt-2'>
-                                    <EmojiPicker
-                                        onEmojiClick={(e) => {
-                                            setEmojiIcon(e.emoji);
-                                            setOpenEmojiPicker(false);
-                                        }}
-                                    />
+                                    {isClient && ( // Only render the emoji picker on the client side
+                                        <EmojiPicker
+                                            onEmojiClick={(e) => {
+                                                setEmojiIcon(e.emoji);
+                                                setOpenEmojiPicker(false);
+                                            }}
+                                        />
+                                    )}
                                 </div>
                             )}
                         </section>
