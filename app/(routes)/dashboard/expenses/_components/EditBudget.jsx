@@ -2,7 +2,6 @@
 import { Button } from '@/components/ui/button';
 import { PenBox } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
-
 import {
     Dialog,
     DialogContent,
@@ -65,7 +64,6 @@ function EditBudget({ budgetInfo, refreshData }) {
                 // Close the dialog and reset the form
                 setIsOpen(false);
                 resetForm();
-                // Refresh the data (for example, re-fetch or update parent component)
                 refreshData();
                 toast.success("Budget updated successfully!");
             }
@@ -135,7 +133,7 @@ function EditBudget({ budgetInfo, refreshData }) {
                             <Input
                                 id="budgetAmount"
                                 type="number"
-                                value={amount} // Bind to state
+                                value={amount} 
                                 onChange={(e) => setAmount(e.target.value)}
                                 min="0"
                                 step="0.01"
@@ -146,7 +144,7 @@ function EditBudget({ budgetInfo, refreshData }) {
                         <DialogFooter className="gap-2 pt-4">
                             <Button
                                 variant="outline"
-                                onClick={() => setIsOpen(false)} // Close the dialog on cancel
+                                onClick={() => setIsOpen(false)} // Close dialog on cancel
                                 type="button"
                             >
                                 Cancel

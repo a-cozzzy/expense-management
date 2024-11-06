@@ -1,6 +1,6 @@
-"use client"; // Ensure the component is a client-side component
+"use client";
 
-import { useRouter } from 'next/navigation'; // Import useRouter from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { db } from '@/utils/dbConfig';
 import { Budgets, Expenses } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs';
@@ -12,7 +12,6 @@ import AddExpense from '../_components/AddExpense';
 import ExpenseListTable from '../_components/ExpenseListTable';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Pen, PenBox, Trash } from 'lucide-react';
-
 import {
     AlertDialog,
     AlertDialogAction,
