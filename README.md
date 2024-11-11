@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pennywise - Expense Management Platform
 
-## Getting Started
+Welcome to **Pennywise**, your comprehensive expense management tool designed for seamless financial tracking and budget management.
 
-First, run the development server:
+## Live Demo
+Check out the live version of the app: [Pennywise](https://pennywise-theta.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Setup and Installation](#setup-and-installation)
+- [Security](#security)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Overview
+**Pennywise** is an expense management platform that helps users track their spending, set budgets, and gain insights into their financial health. The platform offers an interactive dashboard that provides an overview of expenses and budgets through intuitive charts. Users can efficiently manage their expenses under different budget categories and stay on top of their finances.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
+- **Dashboard Overview**: View all key financial metrics at a glance, with charts for better visualization.
+- **Budget Management**: Set up and manage multiple budgets and track expenses under each budget.
+- **Expense Tracking**: Easily log and categorize expenses to keep an accurate record of spending.
+- **User Authentication**: Secure sign-up and sign-in with Clerk integration for seamless access control.
+- **Data Security**: Built with security best practices to ensure that user data is protected.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech Stack
+- **[Next.js](https://nextjs.org/)**: A React framework for building fast and scalable web applications.
+- **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for building custom designs without leaving your HTML.
+- **[ShadCN](https://shadcn.dev/)**: A component library to enhance the design system with prebuilt components.
 
-## Learn More
+### Database
+- **[PostgreSQL](https://www.postgresql.org/)**: A powerful, open-source object-relational database for data storage.
 
-To learn more about Next.js, take a look at the following resources:
+### Authentication
+- **[Clerk](https://clerk.dev/)**: Provides complete user management and authentication solutions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Setup and Installation
+Follow these steps to set up **Pennywise** on your local machine:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the repository**:
+   ```git clone https://github.com/your-username/pennywise.git```
+   
+   ```cd pennywise```
 
-## Deploy on Vercel
+3. **Install dependencies**:
+   Use npm to install the required dependencies.  
+   ```npm install```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Configure environment variables**:
+   Create a `.env.local` file and add your configurations for PostgreSQL database and Clerk authentication services.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. **Run database migrations** (if applicable):
+   Ensure the database schema is up-to-date.  
+   npm run migrate
+
+6. **Run the development server**:
+   Start the application in development mode.  
+   ```npm run dev``` 
+   Visit `http://localhost:3000` to view the app in your browser.
+
+## Security
+**Pennywise** prioritizes the safety and security of user data. Key measures include:
+- **Authentication and Access Control**: Powered by Clerk to manage secure user sign-ups and logins.
+- **Data Encryption**: Sensitive data is stored securely with encryption standards.
+- **Best Practices**: Adopts industry standards for secure coding and data protection to safeguard user information.
+
+## License
+This project is licensed under the **MIT License**, allowing you to use, modify, and distribute the software with attribution to the authors. See the `LICENSE` file for more details.
+
