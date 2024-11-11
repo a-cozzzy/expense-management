@@ -1,17 +1,17 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';  // Correct import for Next.js routing
 import { db } from '@/utils/dbConfig';
 import { Budgets, Expenses } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs';
 import { desc, eq, getTableColumns, sql } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation'; 
+import { useParams } from 'next/navigation';
 import BudgetItem from '../../budgets/_components/BudgetItem';
 import AddExpense from '../_components/AddExpense';
 import ExpenseListTable from '../_components/ExpenseListTable';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Pen, PenBox, Trash } from 'lucide-react';
+import { ArrowLeft, Pen, PenBox, Route, Trash } from 'lucide-react';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -28,10 +28,10 @@ import EditBudget from '../_components/EditBudget';
 
 function ExpensesScreen() {
     const { user } = useUser();
-    const params = useParams(); 
+    const params = useParams();
     const [budgetInfo, setBudgetInfo] = useState();
     const [expenseList, setExpenseList] = useState([]);
-    const { replace } = useRouter(); 
+    const { replace, back } = useRouter();  // useRouter hook from next/navigation
 
     useEffect(() => {
         if (user && params?.id) {
@@ -91,13 +91,18 @@ function ExpensesScreen() {
         <div className='p-10'>
             <h2 className='text-2xl font-bold flex justify-between items-center'>
                 <span className='flex gap-2 items-center'>
-                    <ArrowLeft onClick={()=>route.back()} className='cursor-pointer'/>
+                    {/* Fix route.back() to router.back() */}
+                    <ArrowLeft onClick={() => back()} className='cursor-pointer'/>
                     My Expenses</span>
                     <div className='flex gap-2 items-center'>
-                    <EditBudget budgetInfo={budgetInfo} refreshData={()=>getBudgetInfo()}/>
+                    <EditBudget budgetInfo={budgetInfo} refreshData={() => getBudgetInfo()} />
 
                     <AlertDialog>
-                        <AlertDialogTrigger asChild><Button className="flex gap-2 bg-red-600 text-white border-2 border-transparent hover:bg-black hover:text-white hover:border-white p-2"> <Trash/> Delete </Button></AlertDialogTrigger>
+                        <AlertDialogTrigger asChild>
+                            <Button className="flex gap-2 bg-red-600 text-white border-2 border-transparent hover:bg-black hover:text-white hover:border-white p-2"> 
+                                <Trash/> Delete 
+                            </Button>
+                        </AlertDialogTrigger>
                         <AlertDialogContent>
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

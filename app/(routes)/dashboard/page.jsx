@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 // import { UserButton, useUser } from '@clerk/nextjs';
 // import React, { useEffect, useState } from 'react';
@@ -111,12 +111,6 @@
 
 
 
-
-
-
-
-"use client";
-
 import { UserButton, useUser } from '@clerk/nextjs';
 import React, { useEffect, useState } from 'react';
 import CardInfo from './_components/CardInfo';
@@ -132,7 +126,7 @@ function Dashboard() {
   const [budgetList, setBudgetList] = useState([]);
   const [loading, setLoading] = useState(true); // Track loading state
   const [error, setError] = useState(null); // Track errors
-  const [expensesList, setExpensesList] = useState([]);
+  const [expenseList, setExpenseList] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -157,7 +151,8 @@ function Dashboard() {
         .orderBy(desc(Budgets.id));
 
       setBudgetList(result); // Save budget data
-      getAllExpenses(); // Fetch expenses after the budgets are fetched
+      await getAllExpenses(); // Fetch expenses after the budgets are fetched
+
     } catch (error) {
       setError("Error fetching budget list.");
       console.error("Error fetching budget list:", error);
@@ -173,15 +168,24 @@ function Dashboard() {
         id: Expenses.id,
         name: Expenses.name,
         amount: Expenses.amount,
-        createdAt: Expenses.createdAt
+        createdAt: Expenses.createdAt,
+        budgetId: Expenses.budgetId
       })
-        .from(Expenses)  // Querying Expenses directly instead of Budgets
-        .leftJoin(Budgets, eq(Expenses.budgetId, Budgets.id)) // Corrected join order for fetching expenses
-        .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress)) // Ensure `user` is available
+        .from(Expenses)
+        .innerJoin(Budgets, eq(Expenses.budgetId, Budgets.id))
+        .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress))
         .orderBy(desc(Expenses.id));
 
-      console.log('Fetched Expenses:', result); // Log the fetched data
-      setExpensesList(result); // Set expenses data
+      // console.log('Fetched Expenses:', result);
+      // setExpensesList(result);
+      // console.log('Expenses List in Dashboard:', expensesList);
+
+      if (result && Array.isArray(result)) {
+        setExpenseList(result);
+
+      } else {
+        console.error("Invalid result:", result); // Log if result is not valid
+      }
 
     } catch (error) {
       setError("Error fetching expenses.");
@@ -210,7 +214,7 @@ function Dashboard() {
         <div className="md:col-span-2">
           <BarChartDashboard budgetList={budgetList} />
 
-          <ExpenseListTable expensesList={expensesList} refreshData={() => getBudgetList()} />
+          <ExpenseListTable expenseList={expenseList} refreshData={() => getBudgetList()} />
         </div>
         <div className="grid gap-5">
           <h2 className="font-bold text-lg">Latest Budgets</h2>

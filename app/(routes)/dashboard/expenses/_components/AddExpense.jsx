@@ -3,28 +3,34 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { db } from '@/utils/dbConfig';
 import { Budgets, Expenses } from '@/utils/schema';
+import { Loader } from 'lucide-react';
 import moment from 'moment/moment';
 import React, { useState } from 'react'
 import { toast } from 'sonner';
 
-function AddExpense({budgetId, user, refreshData}) {
+function AddExpense({ budgetId, user, refreshData }) {
 
     const [name, setName] = useState('');
     const [amount, setAmount] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const addNewExpense = async () => {
+        setLoading(true)
         const result = await db.insert(Expenses).values({
             name: name,
-            amount: parseInt(amount, 10),  
+            amount: parseInt(amount, 10),
             budgetId: budgetId,
-            createdAt:moment().format('DD.MM.yyyy')
+            createdAt: moment().format('DD.MM.yyyy')
         }).returning({ insertedId: Budgets.id });
 
-        console.log(result);
+        setAmount('')
+        setName('')
         if (result) {
+            setLoading(false)
             refreshData()
             toast('New Expense Added!');
         }
+        setLoading(false)
     }
 
     return (
@@ -53,11 +59,13 @@ function AddExpense({budgetId, user, refreshData}) {
                 />
             </div>
             <Button
-                disabled={!(name && amount)}
+                disabled={!(name && amount) || loading}
                 onClick={addNewExpense}
                 className='mt-3'
-            >
-                Add New Expense
+            >{loading ?
+                <Loader className='animate-spin' /> : "Add New Expense"
+                }
+
             </Button>
         </div>
     );

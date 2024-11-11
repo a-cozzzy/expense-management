@@ -8,6 +8,7 @@ import { eq } from 'drizzle-orm';
 import { toast } from 'sonner';
 
 function ExpenseListTable({ expenseList, refreshData }) {
+
   const deleteExpense = async(expense)=>{
     const result = await db.delete(Expenses)
     .where(eq(Expenses.id,expense.id))
