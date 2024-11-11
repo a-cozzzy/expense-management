@@ -28,12 +28,12 @@ export default function Page() {
             </a>
 
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-            Welcome to Squid 🦑
+            Welcome to Pennywise 💰
             </h2>
 
             <p className="mt-4 leading-relaxed text-white/90">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-            quibusdam aperiam voluptatum.
+            Track your spending, manage your budget, and save smarter—one penny at a time.
+            
             </p>
         </div>
         </section>

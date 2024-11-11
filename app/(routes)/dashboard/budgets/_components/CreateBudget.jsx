@@ -15,6 +15,7 @@ import { db } from '@/utils/dbConfig';
 import { toast } from 'sonner';
 import { useUser } from '@clerk/nextjs';
 import { Budgets } from '@/utils/schema';
+import EmojiPicker from 'emoji-picker-react';
 
 const CreateBudget = ({ refreshData }) => {
     const [isOpen, setIsOpen] = useState(false);

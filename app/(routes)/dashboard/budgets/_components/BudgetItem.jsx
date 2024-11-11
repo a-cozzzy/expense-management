@@ -1,12 +1,24 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 function BudgetItem({ budget }) {
+  const [isFull, setIsFull] = useState(false);
 
   const calculateProgressPercent = () => {
     const perc = (budget.totalSpend / budget.amount) * 100;
-    return perc.toFixed(2);
+    return Math.min(perc, 100).toFixed(2);  // Ensure progress never goes beyond 100%
   };
+
+  const handleProgressCheck = () => {
+    const perc = (budget.totalSpend / budget.amount) * 100;
+    if (perc >= 100) {
+      setIsFull(true);  // Set to true when the budget is fully spent
+    }
+  };
+
+  React.useEffect(() => {
+    handleProgressCheck();
+  }, [budget.totalSpend]);  // Check when totalSpend changes
 
   return (
     <Link href={'/dashboard/expenses/' + budget?.id}>
@@ -36,6 +48,12 @@ function BudgetItem({ budget }) {
             >
             </div>
           </div>
+
+          {isFull && (
+            <div className="mt-3 text-xs text-red-500">
+              <p className='text-xl mb-5'>Budget fully spent!</p>
+            </div>
+          )}
         </div>
       </div>
     </Link>

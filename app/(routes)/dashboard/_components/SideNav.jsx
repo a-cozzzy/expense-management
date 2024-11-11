@@ -26,12 +26,6 @@ function SideNav() {
             name: 'Expenses',
             icon: ReceiptText,
             path: '/dashboard/expenses'
-        },
-        {
-            id: 4,
-            name: 'Upgrade',
-            icon: ShieldCheck,
-            path: '/dashboard/upgrade'
         }
     ]
     
@@ -44,10 +38,10 @@ function SideNav() {
     return (
         <div className='h-screen p-5 border shadow-sm'>
             <Image 
-                src={'/logo.svg'}
+                src={'/spending.png'}
                 alt='logo'
-                width={50}
-                height={20}
+                width={60}
+                height={30}
             />
             <div className='mt-5'>
                 {
