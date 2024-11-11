@@ -65,5 +65,5 @@ Follow these steps to set up **Pennywise** on your local machine:
 - **Best Practices**: Adopts industry standards for secure coding and data protection to safeguard user information.
 
 ## License
-This project is licensed under the **MIT License**, allowing you to use, modify, and distribute the software with attribution to the authors. See the `LICENSE` file for more details.
+This project is licensed under the **MIT License**, allowing you to use, modify, and distribute the software with attribution to the authors.
 
