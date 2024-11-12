@@ -5,6 +5,8 @@ Welcome to **Pennywise**, your comprehensive expense management tool designed fo
 ## Live Demo
 Check out the live version of the app: [Pennywise](https://pennywise-theta.vercel.app/)
 
+
+![Dashboard](https://github.com/a-cozzzy/expense-management/blob/62ffd590cacf7b363d1f57011f522d52aa7f920b/public/dashboard.png)
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Features](#features)
